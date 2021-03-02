@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <button onclick="action()">Map</button>
+
+</body>
+<script>
+    var mapResult = {{{ result }}}
+    function action() {
+        mapResult.map(element => {
+            return limiter
+                .schedule(() =>
+                    axios.post(endpoint, {
+                        piloto: element.piloto,
+                        arquetipo: element.arquetipo,
+                        fonte: element.fonte,
+                        torneio: element.torneio,
+                        decklist: element.decklist
+                    })
+                )
+                .then(resp => console.log(resp))
+                .catch(err => console.log(err));
+        });
+    }
+</script>
+
+</html>
